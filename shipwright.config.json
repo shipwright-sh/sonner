@@ -1,4 +1,6 @@
 {
+    "source": "react",
+    "targets": ["vue", "svelte", "solid", "angular"],
     "github": {
         "owner": "emilkowalski",
         "repo": "sonner"
