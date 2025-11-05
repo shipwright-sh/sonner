@@ -42,6 +42,8 @@ import {
   type ToastTypes,
 } from "./state";
 
+import "@shipwright-sh/sonner-core/styles.css";
+
 function isAction(action: Action | VNode): action is Action {
   return (action as Action).label !== undefined;
 }
