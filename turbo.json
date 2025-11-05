@@ -10,6 +10,10 @@
       "dev": {
         "persistent": true,
         "cache": false
+      },
+      "tc": {
+        "dependsOn": ["^tc"],
+        "cache": false
       }
     }
   }

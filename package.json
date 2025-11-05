@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "dev": "turbo dev",
-    "test": "playwright test"
+    "test": "playwright test",
+    "tc": "turbo run tc"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.1",
