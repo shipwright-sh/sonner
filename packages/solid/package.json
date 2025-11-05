@@ -15,7 +15,7 @@
         "type": "git",
         "url": "https://github.com/shipwright-sh/sonner.git"
     },
-    "homepage": "https://www.shipwright.sh",
+    "homepage": "https://www.shipwright.sh/packages/solid",
     "bugs": "https://github.com/shipwright-sh/sonner/issues",
     "type": "module",
     "exports": {
