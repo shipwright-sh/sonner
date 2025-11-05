@@ -1,3 +1,4 @@
+import "@shipwright-sh/sonner-solid/style.css";
 import { toast, Toaster } from "@shipwright-sh/sonner-solid";
 
 export function App() {

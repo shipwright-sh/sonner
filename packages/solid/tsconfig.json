@@ -6,6 +6,7 @@
         "moduleDetection": "force",
         "jsx": "preserve",
         "jsxImportSource": "solid-js",
+        "jsxFactory": "JSX.createElement",
         "allowJs": true,
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": true,

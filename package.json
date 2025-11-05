@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "turbo dev",
+    "build": "turbo run build",
     "test": "playwright test",
     "tc": "turbo run tc"
   },
