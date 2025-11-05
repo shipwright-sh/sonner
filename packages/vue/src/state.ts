@@ -2,7 +2,7 @@ import { isHttpResponse } from "@shipwright-sh/sonner-core";
 import type { CSSProperties, VNode } from "vue";
 
 // Helper to check if a value is a VNode
-function isValidElement(value: any): boolean {
+function isValidElement(value: unknown): boolean {
 	return value !== null && typeof value === "object" && "__v_isVNode" in value;
 }
 
@@ -26,24 +26,24 @@ export type Position =
 	| "top-center"
 	| "bottom-center";
 
-export type PromiseT<Data = any> = Promise<Data> | (() => Promise<Data>);
+export type PromiseT<Data = unknown> = Promise<Data> | (() => Promise<Data>);
 
 export interface PromiseIExtendedResult extends ExternalToast {
 	message: VNode | string;
 }
 
-export type PromiseTExtendedResult<Data = any> =
+export type PromiseTExtendedResult<Data = unknown> =
 	| PromiseIExtendedResult
 	| ((data: Data) => PromiseIExtendedResult | Promise<PromiseIExtendedResult>);
 
-export type PromiseTResult<Data = any> =
+export type PromiseTResult<Data = unknown> =
 	| string
 	| VNode
 	| ((data: Data) => VNode | string | Promise<VNode | string>);
 
 export type PromiseExternalToast = Omit<ExternalToast, "description">;
 
-export type PromiseData<ToastData = any> = PromiseExternalToast & {
+export type PromiseData<ToastData = unknown> = PromiseExternalToast & {
 	loading?: string | VNode;
 	success?: PromiseTResult<ToastData> | PromiseTExtendedResult<ToastData>;
 	error?: PromiseTResult | PromiseTExtendedResult;
@@ -151,7 +151,9 @@ class Observer {
 	};
 
 	publish = (data: ToastT) => {
-		this.subscribers.forEach((subscriber) => subscriber(data));
+		this.subscribers.forEach((subscriber) => {
+			subscriber(data);
+		});
 	};
 
 	addToast = (data: ToastT) => {
@@ -208,15 +210,15 @@ class Observer {
 		if (id) {
 			this.dismissedToasts.add(id);
 			requestAnimationFrame(() =>
-				this.subscribers.forEach((subscriber) =>
-					subscriber({ id, dismiss: true }),
-				),
+				this.subscribers.forEach((subscriber) => {
+					subscriber({ id, dismiss: true });
+				}),
 			);
 		} else {
 			this.toasts.forEach((toast) => {
-				this.subscribers.forEach((subscriber) =>
-					subscriber({ id: toast.id, dismiss: true }),
-				);
+				this.subscribers.forEach((subscriber) => {
+					subscriber({ id: toast.id, dismiss: true });
+				});
 			});
 		}
 

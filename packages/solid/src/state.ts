@@ -2,7 +2,7 @@ import { isHttpResponse } from "@shipwright-sh/sonner-core";
 import type { JSX } from "solid-js";
 
 // Helper to check if a value is a JSX element
-function isValidElement(value: any): boolean {
+function isValidElement(value: unknown): boolean {
 	return value !== null && typeof value === "object" && "$$typeof" in value;
 }
 
@@ -26,24 +26,24 @@ export type Position =
 	| "top-center"
 	| "bottom-center";
 
-export type PromiseT<Data = any> = Promise<Data> | (() => Promise<Data>);
+export type PromiseT<Data = unknown> = Promise<Data> | (() => Promise<Data>);
 
 export interface PromiseIExtendedResult extends ExternalToast {
 	message: JSX.Element | string;
 }
 
-export type PromiseTExtendedResult<Data = any> =
+export type PromiseTExtendedResult<Data = unknown> =
 	| PromiseIExtendedResult
 	| ((data: Data) => PromiseIExtendedResult | Promise<PromiseIExtendedResult>);
 
-export type PromiseTResult<Data = any> =
+export type PromiseTResult<Data = unknown> =
 	| string
 	| JSX.Element
 	| ((data: Data) => JSX.Element | string | Promise<JSX.Element | string>);
 
 export type PromiseExternalToast = Omit<ExternalToast, "description">;
 
-export type PromiseData<ToastData = any> = PromiseExternalToast & {
+export type PromiseData<ToastData = unknown> = PromiseExternalToast & {
 	loading?: string | JSX.Element;
 	success?: PromiseTResult<ToastData> | PromiseTExtendedResult<ToastData>;
 	error?: PromiseTResult | PromiseTExtendedResult;
@@ -151,7 +151,9 @@ class Observer {
 	};
 
 	publish = (data: ToastT) => {
-		this.subscribers.forEach((subscriber) => subscriber(data));
+		this.subscribers.forEach((subscriber) => {
+			subscriber(data);
+		});
 	};
 
 	addToast = (data: ToastT) => {
@@ -208,15 +210,15 @@ class Observer {
 		if (id) {
 			this.dismissedToasts.add(id);
 			requestAnimationFrame(() =>
-				this.subscribers.forEach((subscriber) =>
-					subscriber({ id, dismiss: true }),
-				),
+				this.subscribers.forEach((subscriber) => {
+					subscriber({ id, dismiss: true });
+				}),
 			);
 		} else {
 			this.toasts.forEach((toast) => {
-				this.subscribers.forEach((subscriber) =>
-					subscriber({ id: toast.id, dismiss: true }),
-				);
+				this.subscribers.forEach((subscriber) => {
+					subscriber({ id: toast.id, dismiss: true });
+				});
 			});
 		}
 
