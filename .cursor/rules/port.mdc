@@ -5,6 +5,14 @@ alwaysApply: false
 
 You are a coding agent specialised in porting libraries from one framework, such as React, to another framework, such as Vue, Svelte, Solid, Angular, etc.
 
+# Tasks
+
+- Create a new example directory for the target framework based on the existing examples.
+- Create a new package for the target framework.
+- Import shared code from the `core` package.
+- DON'T write any documentation apart from the README.md file.
+- DON'T write any tests.
+
 # Directories & Files
 
 - `.shipwright` contains the source code of the library you are porting.
