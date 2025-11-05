@@ -48,7 +48,7 @@ export function App() {
 
                         toast.promise(promise, {
                             loading: "Loading...",
-                            success: (data) => `${data.name} loaded!`,
+                            success: (data: { name: string }) => `${data.name} loaded!`,
                             error: "Error loading",
                         });
                     }}
@@ -56,6 +56,7 @@ export function App() {
                     Promise
                 </button>
             </div>
+
             <Toaster />
         </div>
     );
