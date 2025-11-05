@@ -10,7 +10,7 @@ jobs:
               run: bun install --frozen-lockfile
             - name: 😎 Check
               run: bun biome ci
-            - name: 🔍 Check types
-              run: bun tc
             - name: 🔨 Build
               run: bun run build
+            - name: 🔍 Check types
+              run: bun tc
