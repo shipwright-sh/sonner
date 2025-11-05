@@ -1,7 +1,22 @@
 {
     "name": "@shipwright-sh/sonner-solid",
-    "version": "0.0.0",
-    "private": true,
+    "version": "0.1.0",
+    "description": "Solid port of Sonner",
+    "keywords": [
+        "toast",
+        "notification",
+        "alert",
+        "popup",
+        "ui"
+    ],
+    "author": "Shipwright",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/shipwright-sh/sonner.git"
+    },
+    "homepage": "https://www.shipwright.sh",
+    "bugs": "https://github.com/shipwright-sh/sonner/issues",
     "type": "module",
     "exports": {
         ".": {
@@ -20,14 +35,11 @@
     "peerDependencies": {
         "solid-js": "^1.0.0"
     },
-    "dependencies": {
-        "@shipwright-sh/sonner-core": "workspace:*"
-    },
     "devDependencies": {
         "solid-js": "^1.8.9",
         "typescript": "^5.0.0",
         "vite": "^7.1.12",
-        "vite-plugin-solid": "^2.10.1"
+        "vite-plugin-solid": "^2.10.1",
+        "@shipwright-sh/sonner-core": "workspace:*"
     }
 }
-

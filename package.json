@@ -7,9 +7,13 @@
     "dev": "turbo dev",
     "build": "turbo run build",
     "test": "playwright test",
-    "tc": "turbo run tc"
+    "tc": "turbo run tc",
+    "cs:new": "changeset",
+    "cs:version": "changeset version",
+    "cs:publish": "changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.29.7",
     "@playwright/test": "^1.56.1",
     "@types/bun": "latest",
     "turbo": "^2.6.0",
