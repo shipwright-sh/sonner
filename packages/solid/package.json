@@ -1,6 +1,7 @@
 {
     "name": "@shipwright-sh/sonner-solid",
-    "version": "0.1.0",
+    "type": "module",
+    "version": "0.1.1",
     "description": "Solid port of Sonner",
     "keywords": [
         "toast",
@@ -15,13 +16,15 @@
         "type": "git",
         "url": "https://github.com/shipwright-sh/sonner.git"
     },
-    "homepage": "https://www.shipwright.sh/packages/solid",
+    "homepage": "https://www.shipwright.sh/packages/sonner",
     "bugs": "https://github.com/shipwright-sh/sonner/issues",
-    "type": "module",
+    "files": [
+        "dist"
+    ],
     "exports": {
         ".": {
             "import": {
-                "types": "./src/index.tsx",
+                "types": "./dist/index.d.ts",
                 "default": "./dist/index.js"
             }
         },
@@ -36,10 +39,11 @@
         "solid-js": "^1.0.0"
     },
     "devDependencies": {
+        "@shipwright-sh/sonner-core": "workspace:*",
         "solid-js": "^1.8.9",
         "typescript": "^5.0.0",
         "vite": "^7.1.12",
-        "vite-plugin-solid": "^2.10.1",
-        "@shipwright-sh/sonner-core": "workspace:*"
+        "vite-plugin-dts": "^4.5.4",
+        "vite-plugin-solid": "^2.10.1"
     }
 }
