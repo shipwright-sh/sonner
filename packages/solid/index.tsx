@@ -1094,6 +1094,6 @@ export function useSonner() {
 }
 
 // Export types and main exports
-export { toast, type ExternalToast, type ToastT, type ToasterProps };
+export { toast, type ExternalToast, type ToastT };
 export type { ToastClassnames, ToastToDismiss, Action };
 
