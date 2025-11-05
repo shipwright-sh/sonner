@@ -1,6 +1,7 @@
-# Changelog
+# @shipwright-sh/sonner-vue
 
 ## 0.1.0
 
-- Initial release of Vue port
+### Minor Changes
 
+- Initial release
