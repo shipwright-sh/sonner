@@ -1,4 +1,6 @@
-![Shipwright](https://www.shipwright.sh/banner.png)
+<a href="https://www.shipwright.sh">
+    <img src="https://www.shipwright.sh/banner.png" alt="Shipwright" />
+</a>
 
 # [Sonner](https://www.shipwright.sh/packages/sonner)
 
