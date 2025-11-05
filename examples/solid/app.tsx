@@ -1,12 +1,61 @@
-import { createSignal } from "solid-js";
 import { toast, Toaster } from "@shipwright-sh/sonner-solid";
 
 export function App() {
-    const [count, setCount] = createSignal(0);
-
     return (
-        <div>
-            <button onClick={() => toast("Hello, world!")}>Show toast</button>
+        <div style={{ padding: "2rem", "font-family": "sans-serif" }}>
+            <h1>Sonner for Solid JS</h1>
+            <div style={{ display: "flex", gap: "1rem", "flex-wrap": "wrap" }}>
+                <button onClick={() => toast("Hello, world!")}>
+                    Default Toast
+                </button>
+                <button onClick={() => toast.success("Success!")}>
+                    Success Toast
+                </button>
+                <button onClick={() => toast.error("Error!")}>
+                    Error Toast
+                </button>
+                <button onClick={() => toast.info("Info!")}>
+                    Info Toast
+                </button>
+                <button onClick={() => toast.warning("Warning!")}>
+                    Warning Toast
+                </button>
+                <button onClick={() => toast.loading("Loading...")}>
+                    Loading Toast
+                </button>
+                <button
+                    onClick={() =>
+                        toast("Event has been created", {
+                            description: "Monday, January 3rd at 6:00pm",
+                            action: {
+                                label: "Undo",
+                                onClick: () => console.log("Undo"),
+                            },
+                        })
+                    }
+                >
+                    With Action
+                </button>
+                <button
+                    onClick={() => {
+                        const promise = () =>
+                            new Promise<{ name: string }>((resolve) =>
+                                setTimeout(
+                                    () => resolve({ name: "Sonner" }),
+                                    2000
+                                )
+                            );
+
+                        toast.promise(promise, {
+                            loading: "Loading...",
+                            success: (data) => `${data.name} loaded!`,
+                            error: "Error loading",
+                        });
+                    }}
+                >
+                    Promise
+                </button>
+            </div>
             <Toaster />
         </div>
     );

@@ -44,6 +44,9 @@
     "packages/solid": {
       "name": "@shipwright-sh/sonner-solid",
       "version": "0.0.0",
+      "dependencies": {
+        "@shipwright-sh/sonner-core": "workspace:*",
+      },
       "devDependencies": {
         "solid-js": "^1.8.9",
         "typescript": "^5.0.0",
