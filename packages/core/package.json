@@ -1,0 +1,5 @@
+{
+    "name": "@shipwright-sh/sonner-core",
+    "private": true,
+    "type": "module"
+}

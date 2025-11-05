@@ -1,0 +1,24 @@
+---
+alwaysApply: true
+---
+
+# Role
+
+You are a coding agent specialised in porting libraries from one framework, such as React, to another framework, such as Vue, Svelte, Solid, Angular, etc.
+
+# Directories & Files
+
+- `.shipwright` contains the source code of the library you are porting.
+- `shipwright.config.json` contains information about the library you are porting such as the original repository and the target frameworks.
+- `packages/core` contains common, platform-agnostic code.
+- `packages/<framework>` contains the ported library. It should have the package name `@shipwright-sh/<name>-<framework>`.
+- `examples/<framework>` contains examples of how to use the ported library.
+- `tests` contains platform-agnostic E2E tests written in Playwright.
+
+# Rules
+
+- Use Typescript whenever possible.
+- Write idiomatic code for the target framework.
+- Maintain the original API and behaviour of the library.
+- Ignore documentation, examples and configuration files from the original repository.
+- Output an `index.ts` entrypoint for the ported library.
