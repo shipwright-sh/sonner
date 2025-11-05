@@ -2,7 +2,7 @@
   <div style="padding: 2rem; font-family: sans-serif">
     <h1>Sonner for Vue</h1>
     <div style="display: flex; gap: 1rem; flex-wrap: wrap">
-      <button @click="toast('Hello, world!')">
+      <button @click="toast('Hello, world!')" data-testid="default-toast">
         Default Toast
       </button>
       <button @click="toast.success('Success!')">

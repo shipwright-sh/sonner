@@ -6,7 +6,11 @@ export function App() {
 		<div style={{ padding: "2rem", "font-family": "sans-serif" }}>
 			<h1>Sonner for Solid JS</h1>
 			<div style={{ display: "flex", gap: "1rem", "flex-wrap": "wrap" }}>
-				<button type="button" onClick={() => toast("Hello, world!")}>
+				<button
+					type="button"
+					onClick={() => toast("Hello, world!")}
+					data-testid="default-toast"
+				>
 					Default Toast
 				</button>
 				<button type="button" onClick={() => toast.success("Success!")}>

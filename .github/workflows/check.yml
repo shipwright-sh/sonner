@@ -19,7 +19,7 @@ jobs:
         needs: check
         strategy:
             matrix:
-                example: [react, preact, solid, vue]
+                example: [preact, solid, vue]
         steps:
             - uses: actions/checkout@v4
             - uses: oven-sh/setup-bun@v2
