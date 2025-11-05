@@ -10,3 +10,7 @@ jobs:
               run: bun install
             - name: 😎 Check
               run: bun biome ci
+            - name: 🔍 Check types
+              run: bun tc
+            - name: 🔨 Build
+              run: bun run build

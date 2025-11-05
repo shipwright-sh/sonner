@@ -1,8 +1,10 @@
 {
-	"name": "preact-example",
+	"name": "preact",
 	"private": true,
 	"scripts": {
-		"dev": "vite"
+		"dev": "vite",
+		"build": "vite build",
+		"tc": "tsc --noEmit"
 	},
 	"dependencies": {
 		"preact": "^10.26.1",

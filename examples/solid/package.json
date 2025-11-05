@@ -1,8 +1,10 @@
 {
-	"name": "solid-example",
+	"name": "solid",
 	"private": true,
 	"scripts": {
-		"dev": "vite"
+		"dev": "vite",
+		"build": "vite build",
+		"tc": "tsc --noEmit"
 	},
 	"dependencies": {
 		"solid-js": "^1.8.9",
