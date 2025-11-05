@@ -43,7 +43,7 @@
 </template>
 
 <script setup lang="ts">
-import { toast } from "@shipwright-sh/sonner-vue";
+import { Toaster, toast } from "@shipwright-sh/sonner-vue";
 
 const _handlePromise = () => {
 	const promise = () =>
