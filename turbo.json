@@ -16,6 +16,10 @@
 		"tc": {
 			"dependsOn": ["^tc"],
 			"cache": false
+		},
+		"preview": {
+			"persistent": true,
+			"cache": false
 		}
 	}
 }
