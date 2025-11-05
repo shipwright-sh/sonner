@@ -1,19 +1,19 @@
-import { ref, onMounted, onUnmounted } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 
 export const useIsDocumentHidden = () => {
-  const isDocumentHidden = ref(
-    typeof document !== "undefined" ? document.hidden : false
-  );
+	const isDocumentHidden = ref(
+		typeof document !== "undefined" ? document.hidden : false,
+	);
 
-  onMounted(() => {
-    const callback = () => {
-      isDocumentHidden.value = document.hidden;
-    };
-    document.addEventListener("visibilitychange", callback);
-    onUnmounted(() =>
-      document.removeEventListener("visibilitychange", callback)
-    );
-  });
+	onMounted(() => {
+		const callback = () => {
+			isDocumentHidden.value = document.hidden;
+		};
+		document.addEventListener("visibilitychange", callback);
+		onUnmounted(() =>
+			document.removeEventListener("visibilitychange", callback),
+		);
+	});
 
-  return isDocumentHidden;
+	return isDocumentHidden;
 };

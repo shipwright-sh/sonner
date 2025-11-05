@@ -1,16 +1,16 @@
 {
-    "name": "solid-example",
-    "private": true,
-    "scripts": {
-        "dev": "vite"
-    },
-    "dependencies": {
-        "solid-js": "^1.8.9",
-        "@shipwright-sh/sonner-solid": "workspace:*"
-    },
-    "devDependencies": {
-        "@types/node": "^22.10.5",
-        "vite": "^7.1.12",
-        "vite-plugin-solid": "^2.10.1"
-    }
+	"name": "solid-example",
+	"private": true,
+	"scripts": {
+		"dev": "vite"
+	},
+	"dependencies": {
+		"solid-js": "^1.8.9",
+		"@shipwright-sh/sonner-solid": "workspace:*"
+	},
+	"devDependencies": {
+		"@types/node": "^22.10.5",
+		"vite": "^7.1.12",
+		"vite-plugin-solid": "^2.10.1"
+	}
 }

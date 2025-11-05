@@ -1,49 +1,49 @@
 {
-    "name": "@shipwright-sh/sonner-solid",
-    "type": "module",
-    "version": "0.1.1",
-    "description": "Solid port of Sonner",
-    "keywords": [
-        "toast",
-        "notification",
-        "alert",
-        "popup",
-        "ui"
-    ],
-    "author": "Shipwright",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/shipwright-sh/sonner.git"
-    },
-    "homepage": "https://www.shipwright.sh/packages/sonner",
-    "bugs": "https://github.com/shipwright-sh/sonner/issues",
-    "files": [
-        "dist"
-    ],
-    "exports": {
-        ".": {
-            "import": {
-                "types": "./dist/index.d.ts",
-                "default": "./dist/index.js"
-            }
-        },
-        "./style.css": "./dist/index.css"
-    },
-    "scripts": {
-        "dev": "vite build --watch",
-        "build": "vite build",
-        "tc": "tsc --noEmit"
-    },
-    "peerDependencies": {
-        "solid-js": "^1.0.0"
-    },
-    "devDependencies": {
-        "@shipwright-sh/sonner-core": "workspace:*",
-        "solid-js": "^1.8.9",
-        "typescript": "^5.0.0",
-        "vite": "^7.1.12",
-        "vite-plugin-dts": "^4.5.4",
-        "vite-plugin-solid": "^2.10.1"
-    }
+	"name": "@shipwright-sh/sonner-solid",
+	"type": "module",
+	"version": "0.1.1",
+	"description": "Solid port of Sonner",
+	"keywords": [
+		"toast",
+		"notification",
+		"alert",
+		"popup",
+		"ui"
+	],
+	"author": "Shipwright",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/shipwright-sh/sonner.git"
+	},
+	"homepage": "https://www.shipwright.sh/packages/sonner",
+	"bugs": "https://github.com/shipwright-sh/sonner/issues",
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			}
+		},
+		"./style.css": "./dist/index.css"
+	},
+	"scripts": {
+		"dev": "vite build --watch",
+		"build": "vite build",
+		"tc": "tsc --noEmit"
+	},
+	"peerDependencies": {
+		"solid-js": "^1.0.0"
+	},
+	"devDependencies": {
+		"@shipwright-sh/sonner-core": "workspace:*",
+		"solid-js": "^1.8.9",
+		"typescript": "^5.0.0",
+		"vite": "^7.1.12",
+		"vite-plugin-dts": "^4.5.4",
+		"vite-plugin-solid": "^2.10.1"
+	}
 }

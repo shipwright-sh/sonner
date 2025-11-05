@@ -43,22 +43,19 @@
 </template>
 
 <script setup lang="ts">
-import { toast, Toaster } from "@shipwright-sh/sonner-vue";
+import { Toaster, toast } from "@shipwright-sh/sonner-vue";
 
 const handlePromise = () => {
-  const promise = () =>
-    new Promise<{ name: string }>((resolve) =>
-      setTimeout(
-        () => resolve({ name: "Sonner" }),
-        2000
-      )
-    );
+	const promise = () =>
+		new Promise<{ name: string }>((resolve) =>
+			setTimeout(() => resolve({ name: "Sonner" }), 2000),
+		);
 
-  toast.promise(promise, {
-    loading: "Loading...",
-    success: (data: { name: string }) => `${data.name} loaded!`,
-    error: "Error loading",
-  });
+	toast.promise(promise, {
+		loading: "Loading...",
+		success: (data: { name: string }) => `${data.name} loaded!`,
+		error: "Error loading",
+	});
 };
 </script>
 

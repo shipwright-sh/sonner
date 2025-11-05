@@ -1,50 +1,50 @@
 {
-    "name": "@shipwright-sh/sonner-vue",
-    "type": "module",
-    "version": "0.1.0",
-    "description": "Vue port of Sonner",
-    "keywords": [
-        "toast",
-        "notification",
-        "alert",
-        "popup",
-        "ui",
-        "vue"
-    ],
-    "author": "Shipwright",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/shipwright-sh/sonner.git"
-    },
-    "homepage": "https://www.shipwright.sh/packages/sonner",
-    "bugs": "https://github.com/shipwright-sh/sonner/issues",
-    "files": [
-        "dist"
-    ],
-    "exports": {
-        ".": {
-            "import": {
-                "types": "./dist/index.d.ts",
-                "default": "./dist/index.js"
-            }
-        },
-        "./style.css": "./dist/index.css"
-    },
-    "scripts": {
-        "dev": "vite build --watch",
-        "build": "vite build",
-        "tc": "tsc --noEmit"
-    },
-    "peerDependencies": {
-        "vue": "^3.0.0"
-    },
-    "devDependencies": {
-        "@shipwright-sh/sonner-core": "workspace:*",
-        "@vitejs/plugin-vue": "^5.2.1",
-        "typescript": "^5.0.0",
-        "vite": "^7.1.12",
-        "vite-plugin-dts": "^4.5.4",
-        "vue": "^3.5.13"
-    }
+	"name": "@shipwright-sh/sonner-vue",
+	"type": "module",
+	"version": "0.1.0",
+	"description": "Vue port of Sonner",
+	"keywords": [
+		"toast",
+		"notification",
+		"alert",
+		"popup",
+		"ui",
+		"vue"
+	],
+	"author": "Shipwright",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/shipwright-sh/sonner.git"
+	},
+	"homepage": "https://www.shipwright.sh/packages/sonner",
+	"bugs": "https://github.com/shipwright-sh/sonner/issues",
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/index.d.ts",
+				"default": "./dist/index.js"
+			}
+		},
+		"./style.css": "./dist/index.css"
+	},
+	"scripts": {
+		"dev": "vite build --watch",
+		"build": "vite build",
+		"tc": "tsc --noEmit"
+	},
+	"peerDependencies": {
+		"vue": "^3.0.0"
+	},
+	"devDependencies": {
+		"@shipwright-sh/sonner-core": "workspace:*",
+		"@vitejs/plugin-vue": "^5.2.1",
+		"typescript": "^5.0.0",
+		"vite": "^7.1.12",
+		"vite-plugin-dts": "^4.5.4",
+		"vue": "^3.5.13"
+	}
 }

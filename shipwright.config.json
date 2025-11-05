@@ -1,8 +1,8 @@
 {
-    "source": "react",
-    "targets": ["vue", "svelte", "solid", "angular", "preact"],
-    "github": {
-        "owner": "emilkowalski",
-        "repo": "sonner"
-    }
+	"source": "react",
+	"targets": ["vue", "svelte", "solid", "angular", "preact"],
+	"github": {
+		"owner": "emilkowalski",
+		"repo": "sonner"
+	}
 }

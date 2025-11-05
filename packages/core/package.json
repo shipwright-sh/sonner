@@ -1,5 +1,5 @@
 {
-    "name": "@shipwright-sh/sonner-core",
-    "private": true,
-    "type": "module"
+	"name": "@shipwright-sh/sonner-core",
+	"private": true,
+	"type": "module"
 }
