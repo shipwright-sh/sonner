@@ -16,7 +16,6 @@ jobs:
               run: bun tc
     test:
         runs-on: ubuntu-latest
-        needs: check
         strategy:
             matrix:
                 example: [preact, solid, vue]
