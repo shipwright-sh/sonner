@@ -1,4 +1,4 @@
-import { computed, effect, signal } from "@preact/signals";
+import { computed, signal } from "@preact/signals";
 import type {
 	HeightT,
 	Position,
@@ -174,7 +174,11 @@ const Toast = (props: ToastProps) => {
 			const height = toastNode.getBoundingClientRect().height;
 			initialHeight.value = height;
 			setHeights((h) => [
-				{ toastId: toastProp.id, height, position: toastProp.position! },
+				{
+					toastId: toastProp.id,
+					height,
+					position: toastProp.position as Position,
+				},
 				...h,
 			]);
 			return () =>
@@ -205,7 +209,7 @@ const Toast = (props: ToastProps) => {
 					{
 						toastId: toastProp.id,
 						height: newHeight,
-						position: toastProp.position!,
+						position: toastProp.position as Position,
 					},
 					...heights,
 				];
@@ -250,16 +254,15 @@ const Toast = (props: ToastProps) => {
 
 		const pauseTimer = () => {
 			if (lastCloseTimerStartTimeRef.current < closeTimerStartTimeRef.current) {
-				const elapsedTime =
-					new Date().getTime() - closeTimerStartTimeRef.current;
+				const elapsedTime = Date.now() - closeTimerStartTimeRef.current;
 				remainingTime.current = remainingTime.current - elapsedTime;
 			}
-			lastCloseTimerStartTimeRef.current = new Date().getTime();
+			lastCloseTimerStartTimeRef.current = Date.now();
 		};
 
 		const startTimer = () => {
 			if (remainingTime.current === Infinity) return;
-			closeTimerStartTimeRef.current = new Date().getTime();
+			closeTimerStartTimeRef.current = Date.now();
 			timeoutId = setTimeout(() => {
 				toastProp.onAutoClose?.(toastProp);
 				deleteToast();
@@ -313,7 +316,6 @@ const Toast = (props: ToastProps) => {
 
 	return (
 		<li
-			tabIndex={0}
 			ref={toastRef}
 			class={cn(
 				className,
@@ -386,8 +388,7 @@ const Toast = (props: ToastProps) => {
 						.getPropertyValue("--swipe-amount-y")
 						.replace("px", "") || 0,
 				);
-				const timeTaken =
-					new Date().getTime() - (dragStartTime.current?.getTime() || 0);
+				const timeTaken = Date.now() - (dragStartTime.current?.getTime() || 0);
 
 				const swipeAmount =
 					swipeDirection.value === "x" ? swipeAmountX : swipeAmountY;
@@ -417,7 +418,7 @@ const Toast = (props: ToastProps) => {
 			onPointerMove={(event) => {
 				if (!pointerStartRef.current || !dismissible) return;
 
-				const isHighlighted = window.getSelection()?.toString().length || 0 > 0;
+				const isHighlighted = !!window.getSelection()?.toString().length;
 				if (isHighlighted) return;
 
 				const yDelta = event.clientY - pointerStartRef.current.y;
@@ -495,6 +496,7 @@ const Toast = (props: ToastProps) => {
 		>
 			{closeButton.value && !toastProp.jsx && toastType !== "loading" ? (
 				<button
+					type="button"
 					aria-label={closeButtonAriaLabel}
 					data-disabled={disabled}
 					data-close-button
@@ -561,6 +563,7 @@ const Toast = (props: ToastProps) => {
 			</div>
 			{toastProp.cancel && isAction(toastProp.cancel) ? (
 				<button
+					type="button"
 					data-button
 					data-cancel
 					style={toastProp.cancel.actionButtonStyle || cancelButtonStyle}
@@ -583,6 +586,7 @@ const Toast = (props: ToastProps) => {
 			) : null}
 			{toastProp.action && isAction(toastProp.action) ? (
 				<button
+					type="button"
 					data-button
 					data-action
 					style={toastProp.action.actionButtonStyle || actionButtonStyle}
@@ -711,8 +715,7 @@ export const Toaster = (props: ToasterProps) => {
 		theme !== "system"
 			? theme
 			: typeof window !== "undefined"
-				? window.matchMedia &&
-					window.matchMedia("(prefers-color-scheme: dark)").matches
+				? window.matchMedia?.("(prefers-color-scheme: dark)").matches
 					? "dark"
 					: "light"
 				: "light",
@@ -774,10 +777,7 @@ export const Toaster = (props: ToasterProps) => {
 		}
 
 		if (theme === "system") {
-			if (
-				window.matchMedia &&
-				window.matchMedia("(prefers-color-scheme: dark)").matches
-			) {
+			if (window.matchMedia?.("(prefers-color-scheme: dark)").matches) {
 				actualTheme.value = "dark";
 			} else {
 				actualTheme.value = "light";
@@ -798,7 +798,7 @@ export const Toaster = (props: ToasterProps) => {
 		try {
 			darkMediaQuery.addEventListener("change", handler);
 			return () => darkMediaQuery.removeEventListener("change", handler);
-		} catch (error) {
+		} catch (_error) {
 			darkMediaQuery.addListener(handler);
 			return () => darkMediaQuery.removeListener(handler);
 		}
@@ -814,6 +814,7 @@ export const Toaster = (props: ToasterProps) => {
 		const handleKeyDown = (event: KeyboardEvent) => {
 			const isHotkeyPressed =
 				hotkey.length > 0 &&
+				// biome-ignore lint/suspicious/noExplicitAny: todo
 				hotkey.every((key) => (event as any)[key] || event.code === key);
 
 			if (isHotkeyPressed) {
@@ -907,14 +908,20 @@ export const Toaster = (props: ToasterProps) => {
 									event.relatedTarget as HTMLElement;
 							}
 						}}
-						onMouseEnter={() => (expanded.value = true)}
-						onMouseMove={() => (expanded.value = true)}
+						onMouseEnter={() => {
+							expanded.value = true;
+						}}
+						onMouseMove={() => {
+							expanded.value = true;
+						}}
 						onMouseLeave={() => {
 							if (!interacting.value) {
 								expanded.value = false;
 							}
 						}}
-						onDragEnd={() => (expanded.value = false)}
+						onDragEnd={() => {
+							expanded.value = false;
+						}}
 						onPointerDown={(event) => {
 							const isNotDismissible =
 								event.target instanceof HTMLElement &&
@@ -923,7 +930,9 @@ export const Toaster = (props: ToasterProps) => {
 							if (isNotDismissible) return;
 							interacting.value = true;
 						}}
-						onPointerUp={() => (interacting.value = false)}
+						onPointerUp={() => {
+							interacting.value = false;
+						}}
 					>
 						{filteredToasts.value
 							.filter(
@@ -954,10 +963,10 @@ export const Toaster = (props: ToasterProps) => {
 									closeButtonAriaLabel={toastOptions?.closeButtonAriaLabel}
 									removeToast={removeToast}
 									toasts={filteredToasts.value.filter(
-										(t: ToastT) => t.position == toast.position,
+										(t: ToastT) => t.position === toast.position,
 									)}
 									heights={heights.value.filter(
-										(h: HeightT) => h.position == toast.position,
+										(h: HeightT) => h.position === toast.position,
 									)}
 									setHeights={setHeights}
 									expandByDefault={!!expand}

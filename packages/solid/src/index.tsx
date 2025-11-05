@@ -250,12 +250,12 @@ const Toast = (props: ToastProps) => {
 		const pauseTimer = () => {
 			if (lastCloseTimerStartTimeRef < closeTimerStartTimeRef) {
 				// Get the elapsed time since the timer started
-				const elapsedTime = new Date().getTime() - closeTimerStartTimeRef;
+				const elapsedTime = Date.now() - closeTimerStartTimeRef;
 
 				remainingTime = remainingTime - elapsedTime;
 			}
 
-			lastCloseTimerStartTimeRef = new Date().getTime();
+			lastCloseTimerStartTimeRef = Date.now();
 		};
 
 		const startTimer = () => {
@@ -264,7 +264,7 @@ const Toast = (props: ToastProps) => {
 			// See: https://github.com/denysdovhan/wtfjs?tab=readme-ov-file#an-infinite-timeout
 			if (remainingTime === Infinity) return;
 
-			closeTimerStartTimeRef = new Date().getTime();
+			closeTimerStartTimeRef = Date.now();
 
 			// Let the toast know it has started
 			timeoutId = setTimeout(() => {
@@ -325,7 +325,6 @@ const Toast = (props: ToastProps) => {
 
 	return (
 		<li
-			tabIndex={0}
 			ref={toastRef}
 			class={cn(
 				mergedProps.class,
@@ -407,8 +406,7 @@ const Toast = (props: ToastProps) => {
 						.getPropertyValue("--swipe-amount-y")
 						.replace("px", "") || 0,
 				);
-				const timeTaken =
-					new Date().getTime() - (dragStartTime?.getTime() || 0);
+				const timeTaken = Date.now() - (dragStartTime?.getTime() || 0);
 
 				const swipeAmount =
 					swipeDirection() === "x" ? swipeAmountX : swipeAmountY;
@@ -440,7 +438,7 @@ const Toast = (props: ToastProps) => {
 			onPointerMove={(event) => {
 				if (!pointerStartRef || !dismissible()) return;
 
-				const isHighlighted = window.getSelection()?.toString().length || 0 > 0;
+				const isHighlighted = !!window.getSelection()?.toString().length;
 				if (isHighlighted) return;
 
 				const yDelta = event.clientY - pointerStartRef.y;
@@ -526,6 +524,7 @@ const Toast = (props: ToastProps) => {
 				}
 			>
 				<button
+					type="button"
 					aria-label={mergedProps.closeButtonAriaLabel}
 					data-disabled={disabled()}
 					data-close-button
@@ -617,6 +616,7 @@ const Toast = (props: ToastProps) => {
 					if (isAction(cancel)) {
 						return (
 							<button
+								type="button"
 								data-button
 								data-cancel
 								style={
@@ -646,6 +646,7 @@ const Toast = (props: ToastProps) => {
 					if (isAction(action)) {
 						return (
 							<button
+								type="button"
 								data-button
 								data-action
 								style={
@@ -766,8 +767,7 @@ export const Toaster = (props: ToasterProps) => {
 		mergedProps.theme !== "system"
 			? mergedProps.theme
 			: typeof window !== "undefined"
-				? window.matchMedia &&
-					window.matchMedia("(prefers-color-scheme: dark)").matches
+				? window.matchMedia?.("(prefers-color-scheme: dark)").matches
 					? "dark"
 					: "light"
 				: "light",
@@ -835,10 +835,7 @@ export const Toaster = (props: ToasterProps) => {
 
 		if (mergedProps.theme === "system") {
 			// check if current preference is dark
-			if (
-				window.matchMedia &&
-				window.matchMedia("(prefers-color-scheme: dark)").matches
-			) {
+			if (window.matchMedia?.("(prefers-color-scheme: dark)").matches) {
 				// it's currently dark
 				setActualTheme("dark");
 			} else {
@@ -862,7 +859,7 @@ export const Toaster = (props: ToasterProps) => {
 			// Chrome & Firefox
 			darkMediaQuery.addEventListener("change", handler);
 			onCleanup(() => darkMediaQuery.removeEventListener("change", handler));
-		} catch (error) {
+		} catch (_error) {
 			// Safari < 14
 			darkMediaQuery.addListener(handler);
 			onCleanup(() => darkMediaQuery.removeListener(handler));
@@ -1044,7 +1041,7 @@ export const Toaster = (props: ToasterProps) => {
 												removeToast={removeToast}
 												toasts={positionFiltered()}
 												heights={heights().filter(
-													(h) => h.position == toast.position,
+													(h) => h.position === toast.position,
 												)}
 												setHeights={setHeights}
 												expandByDefault={!!mergedProps.expand}

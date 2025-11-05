@@ -748,8 +748,8 @@ html[dir="rtl"],
 	[data-sonner-toast],
 	[data-sonner-toast] > *,
 	.sonner-loading-bar {
-		transition: none !important;
-		animation: none !important;
+		transition: none;
+		animation: none;
 	}
 }
 

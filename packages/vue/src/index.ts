@@ -246,12 +246,12 @@ const Toast = defineComponent({
 		const pauseTimer = () => {
 			if (lastCloseTimerStartTimeRef < closeTimerStartTimeRef) {
 				// Get the elapsed time since the timer started
-				const elapsedTime = new Date().getTime() - closeTimerStartTimeRef;
+				const elapsedTime = Date.now() - closeTimerStartTimeRef;
 
 				remainingTime = remainingTime - elapsedTime;
 			}
 
-			lastCloseTimerStartTimeRef = new Date().getTime();
+			lastCloseTimerStartTimeRef = Date.now();
 		};
 
 		const startTimer = () => {
@@ -260,7 +260,7 @@ const Toast = defineComponent({
 			// See: https://github.com/denysdovhan/wtfjs?tab=readme-ov-file#an-infinite-timeout
 			if (remainingTime === Infinity) return;
 
-			closeTimerStartTimeRef = new Date().getTime();
+			closeTimerStartTimeRef = Date.now();
 
 			// Let the toast know it has started
 			timeoutId = setTimeout(() => {
@@ -371,7 +371,7 @@ const Toast = defineComponent({
 					.getPropertyValue("--swipe-amount-y")
 					.replace("px", "") || 0,
 			);
-			const timeTaken = new Date().getTime() - (dragStartTime?.getTime() || 0);
+			const timeTaken = Date.now() - (dragStartTime?.getTime() || 0);
 
 			const swipeAmount =
 				swipeDirection.value === "x" ? swipeAmountX : swipeAmountY;
@@ -404,7 +404,7 @@ const Toast = defineComponent({
 		const handlePointerMove = (event: PointerEvent) => {
 			if (!pointerStartRef || !dismissible.value) return;
 
-			const isHighlighted = window.getSelection()?.toString().length || 0 > 0;
+			const isHighlighted = !!window.getSelection()?.toString().length;
 			if (isHighlighted) return;
 
 			const yDelta = event.clientY - pointerStartRef.y;
@@ -822,7 +822,7 @@ export const Toaster = defineComponent({
 					[props.position].concat(
 						filteredToasts.value
 							.filter((toast) => toast.position)
-							.map((toast) => toast.position!),
+							.map((toast) => toast.position as Position),
 					),
 				),
 			);
@@ -835,8 +835,7 @@ export const Toaster = defineComponent({
 			props.theme !== "system"
 				? props.theme
 				: typeof window !== "undefined"
-					? window.matchMedia &&
-						window.matchMedia("(prefers-color-scheme: dark)").matches
+					? window.matchMedia?.("(prefers-color-scheme: dark)").matches
 						? "dark"
 						: "light"
 					: "light",
@@ -908,10 +907,7 @@ export const Toaster = defineComponent({
 
 				if (props.theme === "system") {
 					// check if current preference is dark
-					if (
-						window.matchMedia &&
-						window.matchMedia("(prefers-color-scheme: dark)").matches
-					) {
+					if (window.matchMedia?.("(prefers-color-scheme: dark)").matches) {
 						// it's currently dark
 						actualTheme.value = "dark";
 					} else {
@@ -939,7 +935,7 @@ export const Toaster = defineComponent({
 					onUnmounted(() =>
 						darkMediaQuery.removeEventListener("change", handler),
 					);
-				} catch (error) {
+				} catch (_error) {
 					// Safari < 14
 					darkMediaQuery.addListener(handler);
 					onUnmounted(() => darkMediaQuery.removeListener(handler));
@@ -963,6 +959,7 @@ export const Toaster = defineComponent({
 				const isHotkeyPressed =
 					props.hotkey.length > 0 &&
 					props.hotkey.every(
+						// biome-ignore lint/suspicious/noExplicitAny: todo
 						(key) => (event as any)[key] || event.code === key,
 					);
 
@@ -1062,15 +1059,21 @@ export const Toaster = defineComponent({
 										lastFocusedElementRef = event.relatedTarget as HTMLElement;
 									}
 								},
-								onMouseenter: () => (expanded.value = true),
-								onMousemove: () => (expanded.value = true),
+								onMouseenter: () => {
+									expanded.value = true;
+								},
+								onMousemove: () => {
+									expanded.value = true;
+								},
 								onMouseleave: () => {
 									// Avoid setting expanded to false when interacting with a toast, e.g. swiping
 									if (!interacting.value) {
 										expanded.value = false;
 									}
 								},
-								onDragend: () => (expanded.value = false),
+								onDragend: () => {
+									expanded.value = false;
+								},
 								onPointerdown: (event: PointerEvent) => {
 									const isNotDismissible =
 										event.target instanceof HTMLElement &&
@@ -1079,7 +1082,9 @@ export const Toaster = defineComponent({
 									if (isNotDismissible) return;
 									interacting.value = true;
 								},
-								onPointerup: () => (interacting.value = false),
+								onPointerup: () => {
+									interacting.value = false;
+								},
 							},
 							positionFiltered.map((toast, toastIndex) =>
 								h(Toast, {
@@ -1107,7 +1112,7 @@ export const Toaster = defineComponent({
 									removeToast,
 									toasts: positionFiltered,
 									heights: heights.value.filter(
-										(h) => h.position == toast.position,
+										(h) => h.position === toast.position,
 									),
 									setHeights,
 									expandByDefault: !!props.expand,

@@ -43,9 +43,9 @@
 </template>
 
 <script setup lang="ts">
-import { Toaster, toast } from "@shipwright-sh/sonner-vue";
+import { toast } from "@shipwright-sh/sonner-vue";
 
-const handlePromise = () => {
+const _handlePromise = () => {
 	const promise = () =>
 		new Promise<{ name: string }>((resolve) =>
 			setTimeout(() => resolve({ name: "Sonner" }), 2000),
