@@ -14,3 +14,24 @@ jobs:
               run: bun run build
             - name: 🔍 Check types
               run: bun tc
+    test:
+        runs-on: ubuntu-latest
+        needs: check
+        strategy:
+            matrix:
+                example: [react, preact, solid, vue]
+        steps:
+            - uses: actions/checkout@v4
+            - uses: oven-sh/setup-bun@v2
+            - name: 🪴 Install dependencies
+              run: bun install --frozen-lockfile
+            - name: 🔨 Build
+              run: bun run build
+            - name: Install Playwright
+              run: bunx playwright install --with-deps
+            - name: 🚀 Start ${{ matrix.example }} preview
+              run: bun preview --filter=${{ matrix.example }}... &
+            - name: ⏳ Wait for server
+              run: npx wait-on http://localhost:4173 --timeout 30000
+            - name: 🧪 Run tests
+              run: bun test
