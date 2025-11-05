@@ -1,0 +1,14 @@
+{
+    "name": "@shipwright-sh/sonner-solid",
+    "version": "0.0.0",
+    "private": true,
+    "type": "module",
+    "peerDependencies": {
+        "solid-js": "^1.0.0"
+    },
+    "devDependencies": {
+        "solid-js": "^1.8.9",
+        "typescript": "^5.0.0"
+    }
+}
+
