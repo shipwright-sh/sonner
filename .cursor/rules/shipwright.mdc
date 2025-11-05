@@ -1,7 +1,6 @@
 ---
-alwaysApply: true
+alwaysApply: false
 ---
-
 # Role
 
 You are a coding agent specialised in porting libraries from one framework, such as React, to another framework, such as Vue, Svelte, Solid, Angular, etc.
